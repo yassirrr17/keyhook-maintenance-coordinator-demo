@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Maintenance Coordinator · Keyhook demo</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 14a3 3 0 1 1 2.83-4H21v3h-2v2h-3v-2H9.83A3 3 0 0 1 7 14Zm0-2a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>
+      </div>
+      <div>
+        <div class="brand-title">Maintenance Coordinator</div>
+        <div class="brand-sub">AI agent prototype · Keyhook job demo · fictional example data</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span id="mode-badge" class="mode-badge" title="Which triage engine is configured">Checking mode…</span>
+      <button id="new-request-btn" class="btn primary" type="button">
+        <span aria-hidden="true">+</span> New request
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar" aria-label="Requests">
+      <div class="sidebar-head">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.41 1.4-5.4-5.38A8 8 0 1 1 10 2Zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></svg>
+          <input id="search" type="search" placeholder="Search tenant, address, issue…" aria-label="Search requests" maxlength="200">
+        </div>
+        <div id="status-filters" class="chip-row" role="toolbar" aria-label="Filter by status"></div>
+        <div class="select-row">
+          <select id="urgency-filter" aria-label="Filter by urgency">
+            <option value="">All urgencies</option>
+            <option value="emergency">Emergency</option>
+            <option value="urgent">Urgent</option>
+            <option value="routine">Routine</option>
+          </select>
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="">All categories</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="electrical">Electrical</option>
+            <option value="gas">Gas</option>
+            <option value="heating">Heating</option>
+            <option value="appliance">Appliance</option>
+            <option value="structural">Structural</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <ul id="request-list" class="request-list"></ul>
+      <div class="sidebar-foot">
+        <span id="list-count" class="muted small"></span>
+        <button id="reset-demo" class="btn ghost small" type="button">Reset demo data</button>
+      </div>
+    </aside>
+
+    <section id="detail" class="detail" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon" aria-hidden="true">⌂</div>
+        <h2>Select a request</h2>
+        <p>Pick a maintenance request on the left to see the agent's triage, the approval gate, the work order and the full audit trail.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Built by Mohammed Alasaad with AI coding assistance (Cursor) · Prototype: mock tools, no real messages are ever sent.
+  </footer>
+
+  <dialog id="new-request-dialog" class="dialog">
+    <form id="new-request-form" novalidate>
+      <div class="dialog-head">
+        <h2>New maintenance request</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+      </div>
+      <div class="dialog-body">
+        <label class="field">
+          <span>Start from a sample <em>(optional)</em></span>
+          <select id="sample-select">
+            <option value="">- Blank form -</option>
+          </select>
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>Tenant name *</span>
+            <input name="tenant_name" required minlength="2" maxlength="100" autocomplete="name">
+            <small class="field-error" data-error-for="tenant_name"></small>
+          </label>
+          <label class="field">
+            <span>Contact preference *</span>
+            <select name="contact_preference">
+              <option value="email">Email</option>
+              <option value="phone">Phone</option>
+              <option value="sms">SMS</option>
+            </select>
+            <small class="field-error" data-error-for="contact_preference"></small>
+          </label>
+        </div>
+        <label class="field">
+          <span>Property address *</span>
+          <input name="property_address" required minlength="5" maxlength="200" placeholder="e.g. 14 Kowhai Street, Mount Eden, Auckland 1024">
+          <small class="field-error" data-error-for="property_address"></small>
+        </label>
+        <label class="field">
+          <span>What's the problem? *</span>
+          <textarea name="description" required minlength="3" maxlength="2000" rows="4" placeholder="Describe what is happening and where in the property"></textarea>
+          <small class="field-error" data-error-for="description"></small>
+        </label>
+        <label class="field">
+          <span>Photo note <em>(optional)</em></span>
+          <input name="photo_note" maxlength="500" placeholder="Describe any photo the tenant attached">
+          <small class="field-error" data-error-for="photo_note"></small>
+        </label>
+        <div id="form-error" class="form-error" role="alert"></div>
+      </div>
+      <div class="dialog-foot">
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+        <button type="submit" class="btn primary" id="submit-request">Submit &amp; triage</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

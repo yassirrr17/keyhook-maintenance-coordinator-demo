@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+*.db
+*.sqlite3
+.env
+.env.*
+.vercel/
+cursor-build.log
