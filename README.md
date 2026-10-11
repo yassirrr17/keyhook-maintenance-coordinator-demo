@@ -1,6 +1,6 @@
 # AI Maintenance Coordinator (Keyhook job demo)
 
-**Live demo:** (coming soon)
+**Live demo:** https://keyhook-maintenance-coordinator-dem.vercel.app
 
 A working prototype of an AI agent that takes a tenant maintenance request all the way to a
 verified work order, with safety overrides and a human approval gate. Built as a job-application
@@ -34,7 +34,7 @@ python3 -m venv .venv
 ```
 
 Open http://localhost:8000. Run the tests with `python -m pytest` (inside the venv).
-`requirements.txt` holds the runtime dependencies only; `requirements-dev.txt` adds pytest and httpx.
+`requirements.txt` holds the runtime dependencies only; `requirements-dev.txt` adds pytest.
 
 - `python seed.py --reset` wipes all requests and audit logs, then re-creates the 5 sample requests.
   The **Reset demo data** button in the UI does the same thing.

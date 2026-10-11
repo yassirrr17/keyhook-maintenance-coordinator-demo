@@ -10,3 +10,5 @@ data/
 .env.*
 .vercel/
 cursor-build.log
+.vercel
+.env*

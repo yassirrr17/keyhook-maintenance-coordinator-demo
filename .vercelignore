@@ -3,3 +3,5 @@ tests
 data
 *.db
 cursor-build.log
+.env*
+.vercel
